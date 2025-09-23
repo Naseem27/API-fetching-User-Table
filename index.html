@@ -2,148 +2,132 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Users Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Directory — Clean Card Style</title>
     <style>
+        /* Base reset */
         * {
             box-sizing: border-box;
         }
 
-        html,
         body {
-            height: 100%;
             margin: 0;
-            padding: 0;
+            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #f7f9fc;
+            color: #222;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 32px auto;
             padding: 16px;
-            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
-                "Helvetica Neue", Arial;
-            color: #222;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        /* Header */
         header h1 {
-            margin: 0 0 8px 0;
-            font-size: 1.5rem;
-            letter-spacing: -0.01em;
+            margin: 0 0 8px;
+            font-size: 1.8rem;
+            color: #333;
         }
 
+        /* Controls */
         .controls {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
-            margin: 12px 0 18px 0;
+            margin-bottom: 20px;
             align-items: center;
             justify-content: center;
         }
 
-        .controls input[type="search"] {
-            padding: 8px 10px;
+        .controls input {
+            padding: 10px;
             border-radius: 8px;
-            border: 1px solid #d0d7de;
-            min-width: 180px;
-            font-size: 0.95rem;
+            border: 1px solid #ccc;
+            background: #fff;
+            font-size: 1rem;
+            min-width: 220px;
         }
 
         .controls button {
-            padding: 8px 12px;
-            border-radius: 8px;
+            padding: 10px 16px;
             border: none;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            background: #0b5fff;
-            color: white;
-            box-shadow: 0 2px 6px rgba(11, 95, 255, 0.12);
+            background: #007bff;
+            color: #fff;
             transition: all 0.2s ease;
         }
 
         .controls button:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 4px 12px rgba(11, 95, 255, 0.2);
-        }
-
-        .controls button:active {
-            transform: translateY(0px) scale(0.98);
-            box-shadow: 0 2px 6px rgba(11, 95, 255, 0.12);
+            background: #0056b3;
         }
 
         .controls button.secondary {
-            background: #eef2ff;
-            color: #0b5fff;
-            border: 1px solid #dbeafe;
-            box-shadow: none;
+            background: #e9ecef;
+            color: #333;
+            border: 1px solid #ccc;
         }
 
-        .table-wrap {
-            width: 100%;
-            overflow-x: auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+        .controls button.secondary:hover {
+            background: #d6d8db;
         }
 
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            min-width: 760px;
+        /* Card grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
         }
 
-        thead th {
-            text-align: left;
-            padding: 12px 16px;
-            font-size: 0.95rem;
-            background: linear-gradient(90deg, #f8fafc, #ffffff);
-            border-bottom: 1px solid #eef2f7;
-        }
-
-        tbody td {
-            padding: 12px 16px;
-            border-bottom: 1px solid #f2f6f9;
-            vertical-align: top;
-            font-size: 0.95rem;
-        }
-
-        tbody tr:nth-child(even) {
+        /* Card style */
+        .card {
             background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 16px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
         }
 
-        tbody tr:nth-child(odd) {
-            background: #fbfdff;
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        tbody tr:hover {
-            background: #f1f8ff;
+        /* Card title */
+        .card h2 {
+            margin: 0 0 8px;
+            font-size: 1.2rem;
+            color: #007bff;
         }
 
-        #status {
-            margin-top: 10px;
-            font-size: 0.92rem;
-            color: #555;
+        .card a {
+            color: #007bff;
+            text-decoration: none;
         }
 
-        a {
-            color: inherit;
+        .card a:hover {
             text-decoration: underline;
         }
 
-        @media (max-width: 600px) {
+        /* Card content */
+        .card p {
+            margin: 6px 0;
+            font-size: 0.95rem;
+            color: #444;
+        }
 
-            .controls input[type="search"],
-            .controls select {
-                min-width: 120px;
-            }
-
-            thead th,
-            tbody td {
-                padding: 10px 12px;
-            }
+        /* Status */
+        #status {
+            margin-top: 20px;
+            color: #555;
+            font-size: 0.9rem;
+            text-align: center;
         }
     </style>
 </head>
@@ -160,139 +144,80 @@
         <button id="clearBtn" class="secondary">Clear</button>
     </div>
 
-    <div class="table-wrap">
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Address</th>
-                    <th>Phone</th>
-                    <th>Website</th>
-                    <th>Company</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody"></tbody>
-        </table>
-    </div>
-    <p id="status">Loading users...</p>
+    <div id="cardGrid" class="card-grid"></div>
+    <p id="status">Loading users…</p>
+
+
     <script>
-        const API_URL = "https://jsonplaceholder.typicode.com/users";
-
-        // Keep the fetched users in a variable
+        // Data
         let users = [];
-
-        // Grab DOM nodes
-        const tableBody = document.getElementById('tableBody');
+        const grid = document.getElementById('cardGrid');
         const statusEl = document.getElementById('status');
         const searchInput = document.getElementById('searchInput');
-        const searchBtn = document.getElementById('searchBtn');
-        const clearBtn = document.getElementById('clearBtn');
 
-        // Escape HTML (same as before)
-        function escapeHtml(str) {
-            if (str === null || str === undefined) return '';
-            return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/\"/g, '&quot;')
-                .replace(/'/g, '&#39;');
-        }
+        // Helpers
+        function escapeHtml(str) { return str ? String(str).replace(/[&<>"]/g, s => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[s])) : ''; }
+        function formatAddress(addr) { if (!addr) return ''; return [addr.street, addr.suite, addr.city].filter(Boolean).join(', '); }
 
-        // Format address (same as before)
-        function formatAddress(addr) {
-            if (!addr) return '';
-            const parts = [addr.street, addr.suite, addr.city, addr.zipcode].filter(Boolean);
-            return parts.join(', ');
-        }
-
-        // Render table (same as before)
-        function renderTable(list) {
-            tableBody.innerHTML = '';
+        // Render users into cards
+        function renderCards(list) {
+            grid.innerHTML = '';
             if (!list || list.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="7">No users found.</td></tr>';
+                grid.innerHTML = '<p style="grid-column:1/-1;text-align:center;color:#999;">No users found.</p>';
                 return;
             }
             list.forEach(user => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-      <td>${escapeHtml(user.name)}</td>
-      <td>${escapeHtml(user.username)}</td>
-      <td><a href="mailto:${escapeHtml(user.email)}">${escapeHtml(user.email)}</a></td>
-      <td>${escapeHtml(formatAddress(user.address))}</td>
-      <td><a href="tel:${escapeHtml(user.phone)}">${escapeHtml(user.phone)}</a></td>
-      <td><a href="http://${escapeHtml(user.website)}" target="_blank" rel="noopener noreferrer">${escapeHtml(user.website)}</a></td>
-      <td>${escapeHtml(user.company && user.company.name ? user.company.name : '')}</td>
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+      <h2>${escapeHtml(user.name)}</h2>
+      <p><strong>Username:</strong> ${escapeHtml(user.username)}</p>
+      <p><strong>Email:</strong> <a href="mailto:${escapeHtml(user.email)}">${escapeHtml(user.email)}</a></p>
+      <p><strong>Address:</strong> ${escapeHtml(formatAddress(user.address))}</p>
+      <p><strong>Phone:</strong> <a href="tel:${escapeHtml(user.phone)}">${escapeHtml(user.phone)}</a></p>
+      <p><strong>Website:</strong> <a href="http://${escapeHtml(user.website)}" target="_blank">${escapeHtml(user.website)}</a></p>
+      <p><strong>Company:</strong> ${escapeHtml(user.company?.name || '')}</p>
     `;
-                tableBody.appendChild(tr);
+                grid.appendChild(card);
             });
         }
 
-        // Fetch users (same as before)
+        // Fetch users
         async function fetchUsers() {
             statusEl.textContent = 'Loading users…';
             try {
                 const res = await fetch('https://jsonplaceholder.typicode.com/users');
-                if (!res.ok) throw new Error('Network error');
                 const data = await res.json();
                 users = data;
-                renderTable(users);
+                renderCards(users);
                 statusEl.textContent = `Loaded ${users.length} users.`;
-            } catch (err) {
-                console.error(err);
+            } catch (e) {
+                console.error(e);
                 statusEl.textContent = 'Failed to load users.';
             }
         }
 
-        // **New search function**
+        // Search
         function searchUsers() {
             const q = searchInput.value.trim().toLowerCase();
-            if (!q) {
-                renderTable(users);
-                statusEl.textContent = `Showing all ${users.length} users.`;
-                return;
-            }
-
-            function matches(value) {
-                if (value === null || value === undefined) return false;
-                return String(value).toLowerCase().includes(q);
-            }
-
-            // Search all fields by default
+            if (!q) { renderCards(users); statusEl.textContent = `Showing all ${users.length} users.`; return; }
+            function match(v) { return v && String(v).toLowerCase().includes(q); }
             const filtered = users.filter(u =>
-                matches(u.name) ||
-                matches(u.username) ||
-                matches(u.email) ||
-                matches(formatAddress(u.address)) ||
-                matches(u.phone) ||
-                matches(u.website) ||
-                matches(u.company && u.company.name)
+                match(u.name) || match(u.username) || match(u.email) ||
+                match(formatAddress(u.address)) || match(u.phone) ||
+                match(u.website) || match(u.company?.name)
             );
-
-            renderTable(filtered);
+            renderCards(filtered);
             statusEl.textContent = `Found ${filtered.length} user(s) for "${q}".`;
         }
 
-        // **Event listeners**
-        searchBtn.addEventListener('click', searchUsers);
-
-        // Search as you type (automatic filtering)
+        // Events
+        document.getElementById('searchBtn').addEventListener('click', searchUsers);
         searchInput.addEventListener('input', searchUsers);
+        document.getElementById('clearBtn').addEventListener('click', () => { searchInput.value = ''; renderCards(users); statusEl.textContent = `Showing all ${users.length} users.`; });
 
-        // Clear button
-        clearBtn.addEventListener('click', () => {
-            searchInput.value = '';
-            renderTable(users);
-            statusEl.textContent = `Showing all ${users.length} users.`;
-            searchInput.focus();
-        });
-
-        // Initial load
+        // Init
         fetchUsers();
-
-
     </script>
 </body>
 
